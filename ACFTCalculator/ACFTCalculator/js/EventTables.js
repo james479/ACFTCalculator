@@ -30,7 +30,7 @@ export const deadLiftTable = {
     340: 100
 };
 
-export const standingPowerThrow = {
+export const standingPowerThrowTable = {
     3.3: 0,
     3.4: 5,
     3.5: 10,

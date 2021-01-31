@@ -31,71 +31,71 @@
             <section class="sliders">
                 <p>Maximum Deadlift (lbs.)</p>
                 <div class="slider-container">
-                    <input type="range" class="regular-output" name="deadlift" id="deadlift" min="80" max="340" step="10" />
+                    <input type="range" class="regular-output input-slider" name="deadlift" data-event="deadlift" min="80" max="340" step="10" value="80"/>
                 </div>
                 <div class="event-result">
-                    <p><span class="slider-output">0</span> lbs.</p>
-                    <p><span id="points">0</span> points</p>
+                    <p><span class="slider-output" id="deadlift"></span> lbs.</p>
+                    <p><span id="deadlift-score"></span> points</p>
                 </div>
             </section>
 
             <section class="sliders">
                 <p>Standing Power Throw (m)</p>
                 <div class="slider-container">
-                    <input type="range" class="regular-output" name="standing-throw" id="standing-throw" min="3.3" max="12.5" step=".1" />
+                    <input type="range" class="regular-output" name="standing-throw" data-event="standing-throw" min="3.3" max="12.5" step="0.1" value="3.3"/>
                 </div>
                 <div class="event-result">
-                    <p><span class="slider-output">0</span> m</p>
-                    <p><span class="points">0</span> points</p>
+                    <p><span class="slider-output" id="standing-throw"></span> m</p>
+                    <p><span id="standing-throw-score">0</span> points</p>
                 </div>
             </section>
 
             <section class="sliders">
                 <p>T Push-up (reps)</p>
                 <div class="slider-container">
-                    <input type="range" class="regular-output" name="pushup" id="pushup" min="0" max="60" step="1" />
+                    <input type="range" class="regular-output" name="pushup" data-event="pushup" min="0" max="60" step="1" value="0" />
                 </div>
                 <div class="event-result">
-                    <p><span class="slider-output">0</span> reps</p>
-                    <p><span class="points">0</span> points</p>
+                    <p><span class="slider-output" id="pushup"></span> reps</p>
+                    <p><span id="pushup-score">0</span> points</p>
                 </div>
             </section>
 
             <section class="sliders">
                 <p>Sprint Drag Carry (m:s)</p>
                 <div class="slider-container">
-                    <input type="range" class="time-output" name="drag-carry" id="drag-carry" min="215" max="93" step="1" />
+                    <input type="range" class="time-output" name="drag-carry" data-event="drag-carry" min="93" max="215" step="1" value="93"/>
                 </div>
                 <div class="event-result">
-                    <p><span class="minutes-output">0</span>:<span class="seconds-output">0</span> m:s</p>
-                    <p><span class="points">0</span> points</p>
+                    <p><span class="minutes-output" id="drag-carry"></span> m:s</p>
+                    <p><span id="drag-carry-score">0</span> points</p>
                 </div>
             </section>
 
             <section class="sliders">
                 <p>Leg Tuck (reps)</p>
                 <div class="slider-container">
-                    <input type="range" class="regular-output" name="leg-tuck" id="leg-tuck" min="0" max="20" step="1" />
+                    <input type="range" class="regular-output" name="leg-tuck" data-event="leg-tuck" min="0" max="20" step="1" value="0" />
                 </div>
                 <div class="event-result">
-                    <p><span class="slider-output">0</span> reps</p>
-                    <p><span class="points">0</span> points</p>
+                    <p><span class="slider-output" id="leg-tuck"></span> reps</p>
+                    <p><span id="leg-tuck-score">0</span> points</p>
                 </div>
             </section>
 
             <section class="sliders">
                 <p>2 Mile Run (m:s)</p>
                 <div class="slider-container">
-                    <input type="range" class="time-output" name="run" id="run" min="1368" max="810" step="1" />
+                    <input type="range" class="time-output" name="run" data-event="run" min="810" max="1368" step="1" value="810" />
                 </div>
                 <div class="event-result">
-                    <p><span class="minutes-output">0</span>:<span class="seconds-output">0</span> m:s</p>
-                    <p><span class="points">0</span> points</p>
+                    <p><span class="minutes-output" id="run">0</span> m:s</p>
+                    <p><span run-score>0</span> points</p>
                 </div>
             </section>
 
             <section class="total-score">
-                <p class="score-label">Total Score: <span id="score">0</span></p>
+                <p class="score-label">Total Score: <span id="total-score">0</span></p>
                 <p class="result-label">Does not meet Army minimum Standard</p>
             </section>
         </div>
