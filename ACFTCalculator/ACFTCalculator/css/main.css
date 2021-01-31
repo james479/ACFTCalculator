@@ -1,2 +1,81 @@
-﻿body {
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+main {
+    background-color: #bbbbc2;
+    margin: auto;
+    width: 60%;
+
+}
+
+main h1 {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.main-container {
+    width: 85%;
+    margin: 3em auto;
+    padding: 1em 0;
+}
+
+.standards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.standards h2 {
+    align-self: center;
+}
+
+.radio-group {
+    align-self: center;
+}
+
+.sliders {
+    padding: 1em;
+}
+
+.sliders p {
+    margin-bottom: .7em;
+}
+
+.slider-container {
+    width: 100%;
+    text-align: center;
+}
+
+input[type=range] {
+    width: 100%;
+    
+}
+
+.event-result {
+    display: flex;
+    justify-content: space-around;
+    margin-top: .8em;
+}
+
+.score-label {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 1em;
+}
+
+.result-label {
+    font-weight: bold;
+}
+
+
+
+
