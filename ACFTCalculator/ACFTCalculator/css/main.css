@@ -74,4 +74,14 @@ input[type=range] {
     font-weight: bold;
 }
 
+#result-lable {
+    font-size: 1.5em;
+}
 
+.pass {
+    color: green;
+}
+
+.fail {
+    color: red;
+}

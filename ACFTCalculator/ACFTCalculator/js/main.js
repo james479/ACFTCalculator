@@ -62,21 +62,62 @@ function getRunScore(value) {
     return runTable[value];
 } 
 
-//variables to keep track of score in each event
-let deadliftScore = 0;
-let standingThrowScore = 0;
-let pushupScore = 0;
-let legTuckScore = 0;
-let dragCarryScore = 0;
-let runScore = 0;
+//object for scores in each event
+const eventScore = {
+    deadliftScore: 0,
+    standingThrowScore: 0,
+    pushupScore: 0,
+    legTuckScore: 0,
+    dragCarryScore: 0,
+    runScore: 0
+}
 
 function getTotalScore() {
-    return deadliftScore + standingThrowScore + pushupScore + legTuckScore + dragCarryScore + runScore;
+    let total = 0;
+    for (let event in eventScore) {
+        total += eventScore[event];
+    }
+    return total;
+}
+
+function getStandards() {
+    let radioButtons = document.getElementsByName('group-radio-standards');
+    if (radioButtons[0].checked) {
+        return 60;
+    }
+    else if (radioButtons[1].checked) {
+        return 65;
+    }
+    else {
+        return 70;
+    }
+}
+
+
+function passed(standard) {
+    let pass = true;
+    for (event in eventScore) {
+        if (eventScore[event] < standard) {
+            pass = false;
+            break;
+        }
+    }
+    return pass;
+}
+
+//populate pass/fail label
+function populatePassFailLabel() {
+    let passOrFail = document.getElementById('result-label');
+    if (passed(getStandards())) {
+        passOrFail.textContent = 'PASS'
+    }
+    else {
+        passOrFail.textContent = 'FAIL';
+    }
 }
 
 let sliders = document.getElementsByClassName('regular-output');
 let totalScoreLabel = document.getElementById('total-score');
-
 
 for (let i = 0; i < sliders.length; i++) {
     let fitnessEventID = sliders[i].dataset.event;
@@ -84,6 +125,7 @@ for (let i = 0; i < sliders.length; i++) {
     let scoreLabel = document.getElementById(`${fitnessEventID}-score`);
     scoreLabel.textContent = 0;
     totalScoreLabel.textContent = getTotalScore();
+
 
     let min = parseFloat(sliders[i].getAttribute('min'));
     let max = parseFloat(sliders[i].getAttribute('max'));
@@ -104,96 +146,48 @@ for (let i = 0; i < sliders.length; i++) {
 
         switch (fitnessEventID) {
             case 'deadlift':
-                deadliftScore = getDeadliftScore(sliders[i].value);
-                scoreLabel.textContent = deadliftScore;
+                eventScore.deadliftScore = getDeadliftScore(sliders[i].value);
+                scoreLabel.textContent = eventScore.deadliftScore;
                 break;
             case 'standing-throw':
-                standingThrowScore = getPowerThrowScore(sliders[i].value);
-                scoreLabel.textContent = standingThrowScore;
+                eventScore.standingThrowScore = getPowerThrowScore(sliders[i].value);
+                scoreLabel.textContent = eventScore.standingThrowScore;
                 break;
             case 'pushup':
-                pushupScore = getPushUpScore(sliders[i].value);
-                scoreLabel.textContent = pushupScore;
+                eventScore.pushupScore = getPushUpScore(sliders[i].value);
+                scoreLabel.textContent = eventScore.pushupScore;
                 break;
             case 'drag-carry':
                 let convertedCarryScore = reverseNumber(min, max, sliders[i].value);
                 convertedCarryScore = convertMinutesAndSeconds(convertedCarryScore);
-                dragCarryScore = getSprintDragCarryScore(convertedCarryScore);
-                scoreLabel.textContent = dragCarryScore;
+                eventScore.dragCarryScore = getSprintDragCarryScore(convertedCarryScore);
+                scoreLabel.textContent = eventScore.dragCarryScore;
                 break;
             case 'leg-tuck':
-                legTuckScore = getLegTuckScore(sliders[i].value);
-                scoreLabel.textContent = legTuckScore;
+                eventScore.legTuckScore = getLegTuckScore(sliders[i].value);
+                scoreLabel.textContent = eventScore.legTuckScore;
                 break;
             case 'run':
                 let convertedRunScore = reverseNumber(min, max, sliders[i].value);
                 convertedRunScore = convertMinutesAndSeconds(convertedRunScore);
-                runScore = getRunScore(convertedRunScore);
-                scoreLabel.textContent = runScore;
+                eventScore.runScore = getRunScore(convertedRunScore);
+                scoreLabel.textContent = eventScore.runScore;
                 break;
         }
         totalScoreLabel.textContent = getTotalScore();
+        populatePassFailLabel();
     });
+
+    document.querySelectorAll('input[type="radio"]').forEach(function (e) {
+        e.addEventListener('click', function () {
+            populatePassFailLabel();
+        });
+    });
+    
 }
 
-//get all regular slider out classes
-//let regularinputSliders = document.getElementsByClassName('regular-output');
 
-//for (let i = 0; i < regularinputSliders.length; i++) {
-//    let eventID = regularinputSliders[i].dataset.event;
-//    let label = document.getElementById(eventID);
-//    let scoreLabel = document.getElementById(`${eventID}-score`);
-//    scoreLabel.textContent = 0;
-//    let totalScore = document.getElementById('total-score');
-//    label.textContent = regularinputSliders[i].value;
 
-//    regularinputSliders[i].addEventListener('input', function () {
-//        label.textContent = regularinputSliders[i].value;
-//        switch (eventID) {
-//            case 'deadlift':
-//                deadliftScore = getDeadliftScore(regularinputSliders[i].value);
-//                scoreLabel.textContent = deadliftScore;
-//                break;
-//            case 'standing-throw':
-//                standingThrowScore = getPowerThrowScore(regularinputSliders[i].value);
-//                scoreLabel.textContent = standingThrowScore;
-//                break;
-//            case 'pushup':
-//                pushupScore = getPushUpScore(regularinputSliders[i].value);
-//                scoreLabel.textContent = pushupScore;
-//                break;
-//            case 'leg-tuck':
-//                legTuckScore = getLegTuckScore(regularinputSliders[i].value);
-//                scoreLabel.textContent = legTuckScore;
-//                break;
-//        }
-//        totalScore.textContent = getTotalScore();
-//    });
-//}
-
-////classes with time as score
-//let timeSliders = document.getElementsByClassName('time-output');
-
-//for (let i = 0; i < timeSliders.length; i++) {
-//    let eventID = timeSliders[i].dataset.event;
-//    console.log(eventID);
-//    let label = document.getElementById(eventID);
-//    let scoreLabel = document.getElementById(`${eventID}-score`);
-//    scoreLabel.textContent = 0;
-//    let totalScore = document.getElementById('total-score');
-//    label.textContent = regularinputSliders[i].value;
-//    let min = parseFloat(timeSliders[i].getAttribute('min'));
-//    let max = parseFloat(timeSliders[i].getAttribute('max'));
-
-//    label.textContent = minutesAndSecondsDisplay(reverseNumber(min, max, parseFloat(timeSliders[i].value)));
-//    timeSliders[i].addEventListener('input', function () {
-//        label.textContent = minutesAndSecondsDisplay(reverseNumber(min, max, parseFloat(timeSliders[i].value)));
-//        switch (eventID) {
-
-//            default:
-//        }
-//    });
-//}
 
 
 
